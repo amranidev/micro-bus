@@ -3,11 +3,16 @@
 namespace Amranidev\MicroBus\Sqs;
 
 use Aws\Sqs\SqsClient;
+use Illuminate\Support\Traits\Macroable;
 use Illuminate\Queue\Jobs\SqsJob as AbstractSqsJob;
 
 class SqsJob extends AbstractSqsJob
 {
+    use Macroable;
+
     /**
+     * Job handler class.
+     *
      * @var string
      */
     protected $handler;
@@ -29,6 +34,8 @@ class SqsJob extends AbstractSqsJob
     }
 
     /**
+     * Get the decoded body of the job.
+     *
      * @return array
      */
     public function payload()

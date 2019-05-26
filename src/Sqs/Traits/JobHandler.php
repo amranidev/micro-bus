@@ -10,6 +10,7 @@ use Illuminate\Queue\Jobs\Job;
 trait JobHandler
 {
     /**
+     * Execute the job.
      *
      * @param \Illuminate\Queue\Jobs\Job $job
      * @param mixed|null $data
@@ -31,6 +32,8 @@ trait JobHandler
     }
 
     /**
+     * Set the queue job.
+     *
      * @param $job
      */
     protected function setJob($job)
@@ -41,6 +44,8 @@ trait JobHandler
     }
 
     /**
+     * Set the payload.
+     *
      * @param $payload
      */
     protected function setPayload($payload)

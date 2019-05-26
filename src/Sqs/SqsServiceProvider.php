@@ -18,6 +18,10 @@ class SqsServiceProvider extends ServiceProvider
     {
         $this->commands([JobSubscriberCommand::class]);
 
+        SqsJob::macro('getInstance', function () {
+            return $this->instance;
+        });
+
         $this->publishConfiguration();
     }
 
@@ -29,6 +33,7 @@ class SqsServiceProvider extends ServiceProvider
     public function register()
     {
         $this->addSqsConnector();
+        $this->bindJobMab();
     }
 
     /**
@@ -43,8 +48,7 @@ class SqsServiceProvider extends ServiceProvider
             $config = $this->app->make(Repository::class);
 
             $manager->addConnector('subscriber', function () use ($config) {
-                $map = new JobMap($config->get('subscriber.subscribers'));
-                return new SqsConnector($map);
+                return new SqsConnector;
             });
         });
     }
@@ -56,8 +60,21 @@ class SqsServiceProvider extends ServiceProvider
      */
     protected function publishConfiguration()
     {
-        $configPath = __DIR__.'/../../config/subscriber.php';
+        $configPath = __DIR__ . '/../../config/subscriber.php';
         $this->publishes([
-            $configPath => config_path('subscriber.php'), ]);
+            $configPath => base_path('config/subscriber.php'),]);
+    }
+
+    /**
+     * Bind JobMap.
+     *
+     * @return void
+     */
+    protected function bindJobMab()
+    {
+        $this->app->singleton('jobmap', function ($app) {
+            $map = config('subscriber.subscribers');
+            return new JobMap($map);
+        });
     }
 }

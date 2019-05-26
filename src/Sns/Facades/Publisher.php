@@ -4,6 +4,9 @@ namespace Amranidev\MicroBus\Sns\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
+/**
+ * @method static publish(string $event, $message)
+ */
 class Publisher extends Facade
 {
     /**

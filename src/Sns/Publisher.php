@@ -5,14 +5,25 @@ namespace Amranidev\MicroBus\Sns;
 class Publisher
 {
     /**
+     * SNS client.
+     *
      * @var \Aws\Sns\SnsClient
      */
     protected $sns;
 
     /**
-     * @var \Illuminate\Config\Repository|mixed
+     * The underlying topics collection.
+     *
+     * @var \Illuminate\Support\Collection
      */
     protected $topics;
+
+    /**
+     * The message is serializable by default.
+     *
+     * @var boolean
+     */
+    protected $serializable = true;
 
     /**
      * Publisher constructor.
@@ -27,29 +38,71 @@ class Publisher
     }
 
     /**
-     * @param $topic
-     * @param $message
+     * Publish the message to SNS.
+     *
+     * @param string $topic
+     * @param mixed $message
      *
      * @return \Aws\Result
      * @throws \Exception
      */
     public function publish($topic, $message)
     {
-        $topic = $this->processTopic($topic);
+        $topic = $this->getTopicArn($topic);
 
         return $this->sns->publish([
-            'Message'  => serialize($message),
+            'Message'  => $this->prepareMessage($message),
             'TopicArn' => $topic,
         ]);
     }
 
     /**
-     * @param $topic
+     * Set message serialization to false.
+     *
+     * @return \Amranidev\MicroBus\Sns\Publisher
+     */
+    public function withoutSerializing()
+    {
+        $this->serializable = false;
+
+        return $this;
+    }
+
+    /**
+     * Determine if the message is serializable.
+     *
+     * @return boolean
+     */
+    public function isSerializable()
+    {
+        return $this->serializable ? true : false;
+    }
+
+    /**
+     * Prepare the message to send.
+     *
+     * @param mixed $message
+     *
+     * @return string
+     */
+    protected function prepareMessage($message)
+    {
+        if ($this->isSerializable()) {
+            return serialize($message);
+        }
+
+        return $message;
+    }
+
+    /**
+     * Retrieve the TopicArn form the config.
+     *
+     * @param string $topic
      *
      * @return mixed
      * @throws \Exception
      */
-    protected function processTopic($topic)
+    protected function getTopicArn($topic)
     {
         if ($this->topics->has($topic)) {
             return $this->topics->get($topic);
@@ -59,6 +112,16 @@ class Publisher
             return $topic;
         }
 
-        throw new \Exception('Unknown Topic');
+        throw new \Exception("Topic or event ({$topic}) doesn't exists");
+    }
+
+    /**
+     * Get SNS client.
+     *
+     * @return \Aws\Sns\SnsClient
+     */
+    public function getSns()
+    {
+        return $this->sns;
     }
 }

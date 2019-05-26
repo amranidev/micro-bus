@@ -1,0 +1,29 @@
+{
+  "name": "amranidev/micro-bus",
+  "description": "Build your laravel/lumen microservice application with AWS SNS/SQS",
+  "type": "laravel-package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Houssain Amrani",
+      "email": "amranidev@gmail.com"
+    }
+  ],
+  "require": {
+    "aws/aws-sdk-php": "^3.95"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.1",
+    "orchestra/testbench": "^3.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Amranidev\\MicroBus\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Amranidev\\MicroBus\\Tests\\": "tests/"
+    }
+  }
+}

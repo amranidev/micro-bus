@@ -7,11 +7,13 @@ class SnsManager
     /**
      * The application instance.
      *
-     * @var \Illuminate\Foundation\Application
+     * @var \Illuminate\Contracts\Container\Container
      */
     public $app;
 
     /**
+     * The underlying SNS connection.
+     *
      * @var SnsConnector
      */
     protected $connection;
@@ -19,7 +21,7 @@ class SnsManager
     /**
      * SnsManager constructor.
      *
-     * @param \Illuminate\Foundation\Application $app
+     * @param \Illuminate\Contracts\Container\Container $app
      */
     public function __construct($app)
     {
@@ -27,7 +29,9 @@ class SnsManager
     }
 
     /**
-     * @return \Amranidev\MicroBus\Sns\Publisher|\Amranidev\MicroBus\Sns\SnsConnector
+     * Establish SNS connection.
+     *
+     * @return \Amranidev\MicroBus\Sns\Publisher
      */
     public function connection()
     {
@@ -38,6 +42,8 @@ class SnsManager
     }
 
     /**
+     * Resolve publisher.
+     *
      * @return \Amranidev\MicroBus\Sns\Publisher
      */
     protected function resolve()
@@ -47,7 +53,9 @@ class SnsManager
     }
 
     /**
-     * @todo update configuration after creating a dedicated package.
+     * Get SNS configuration.
+     *
+     * @return array
      */
     public function getConfig()
     {

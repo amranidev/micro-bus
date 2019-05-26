@@ -3,14 +3,21 @@
 namespace Amranidev\MicroBus\Sqs;
 
 use Aws\Sqs\SqsClient;
+use Illuminate\Pipeline\Pipeline;
 use Illuminate\Queue\SqsQueue as AbstractSqsQueue;
 
 class SqsQueue extends AbstractSqsQueue
 {
     /**
-     * @var \App\Services\Components\Sns\JobMap
+     * The underlying pipeline.
+     *
+     * @var array
      */
-    protected $map;
+    protected $pipeline = [
+        \Amranidev\MicroBus\Sqs\Pipeline\ValidateResponse::class,
+        \Amranidev\MicroBus\Sqs\Pipeline\HasTopicArn::class,
+        \Amranidev\MicroBus\Sqs\Pipeline\VerifySubscription::class,
+    ];
 
     /**
      * SnsQueue constructor.
@@ -18,18 +25,18 @@ class SqsQueue extends AbstractSqsQueue
      * @param \Aws\Sqs\SqsClient $sqs
      * @param string $default
      * @param $prefix
-     * @param \Amranidev\MicroBus\Sqs\JobMap $map
      */
-    public function __construct(SqsClient $sqs, string $default, $prefix, JobMap $map)
+    public function __construct(SqsClient $sqs, string $default, $prefix)
     {
         parent::__construct($sqs, $default, $prefix);
-        $this->map = $map;
     }
 
     /**
+     * Pop the next job off of the queue.
+     *
      * @param null $queue
      *
-     * @return \App\Services\Components\Sns\SnsJob|\Illuminate\Contracts\Queue\Job|null
+     * @return \Amranidev\MicroBus\Sqs\SqsJob|null
      */
     public function pop($queue = null)
     {
@@ -39,41 +46,42 @@ class SqsQueue extends AbstractSqsQueue
             'AttributeNames' => ['ApproximateReceiveCount'],
         ]);
 
-        return $this->processMessage($queue ,$response);
+        return $this->processResponse($queue, $response);
     }
 
     /**
-     * @param $queue
-     * @param $response
+     * Process queue response.
      *
-     * @return \Amranidev\MicroBus\Sqs\SqsJob
+     * @param $queue
+     * @param \Aws\Result $response
+     *
+     * @return \Amranidev\MicroBus\Sqs\SqsJob|null
      */
-    protected function processMessage($queue, $response)
+    protected function processResponse($queue, $response)
     {
-        // if the messages are not empty then we proceed
-        if (!is_null($response['Messages']) && count($response['Messages']) > 0) {
-            $body = json_decode($response['Messages'][0]['Body'], true);
+        $message = $this->pipe($response->toArray());
 
-            // If the message body has not `TopicArn` attribute, ignore this message
-            if (!isset($body['TopicArn'])) {
-                return null;
-            }
-
-            try {
-                // Get the job handler Through the the JonMap.
-                $handler = $this->map->fromTopic($body['TopicArn']);
-            } catch (\Exception $e) {
-                // Ignore if the job not found.
-                return null;
-            }
-
-            // Proceed Sqs Job
-            return new SqsJob(
-                $this->container, $this->sqs, $response['Messages'][0],
-                $this->connectionName, $queue, $handler
-            );
+        if (is_null($message)) {
+            return null;
         }
 
-        return null;
+        return new SqsJob(
+            $this->container, $this->sqs, $response['Messages'][0],
+            $this->connectionName, $queue, $message['handler']
+        );
+    }
+
+    /**
+     * Process the queue response through the pipeline.
+     *
+     * @param array $response
+     *
+     * @return mixed
+     */
+    protected function pipe($response)
+    {
+        return (new Pipeline($this->container))->send($response)
+            ->through($this->pipeline)
+            ->thenReturn();
     }
 }

@@ -5,6 +5,8 @@ namespace Amranidev\MicroBus\Sqs;
 class JobMap
 {
     /**
+     * The underlying topics job map.
+     *
      * @var array
      */
     protected $map;
@@ -20,6 +22,8 @@ class JobMap
     }
 
     /**
+     * Get the job class from a given topic.
+     *
      * @param string $topic
      *
      * @return string
@@ -29,7 +33,7 @@ class JobMap
     {
         $job = array_search($topic, $this->map);
         if (! $job) {
-            throw new \Exception("Topic $topic is not mapped to any Job");
+            throw new \Exception("Topic {$topic} doesn't exists.");
         }
         return $job;
     }

@@ -1,0 +1,12 @@
+{
+  "Type" : "Notification",
+  "MessageId" : "63dbfca6-97d4-5056-b9a9-a87a6b63681f",
+  "TopicArn" : "arn:aws:sns:eu-west-1:111111111111:my-topic-arn",
+  "Subject" : "Notification Subject",
+  "Message" : "{\"body\":\"Hooray! you have a message!\"}",
+  "Timestamp" : "2019-05-17T16:55:19.688Z",
+  "SignatureVersion" : "1",
+  "Signature" : "aws-signature-goes-here",
+  "SigningCertURL" : "signature-certificate-will-be-here",
+  "UnsubscribeURL" : "unsubscribe-link-here"
+}

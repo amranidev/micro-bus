@@ -8,7 +8,9 @@ use Illuminate\Support\Arr;
 class SnsConnector
 {
     /**
-     * @param $config
+     * Establish an SNS Connection.
+     *
+     * @param array $config
      *
      * @return \Amranidev\MicroBus\Sns\Publisher
      */
@@ -22,7 +24,9 @@ class SnsConnector
     }
 
     /**
-     * @param $config
+     * Get the default configuration.
+     *
+     * @param array $config
      *
      * @return array
      */

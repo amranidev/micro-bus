@@ -10,24 +10,11 @@ use Illuminate\Queue\Connectors\SqsConnector as AbstractSqsConnector;
 class SqsConnector extends AbstractSqsConnector implements ConnectorInterface
 {
     /**
-     * @var \App\Services\Components\Sns\JobMap
-     */
-    protected $map;
-
-    /**
-     * SnsConnector constructor.
+     * Establish a queue connection.
      *
-     * @param \Amranidev\MicroBus\Sqs\JobMap $map
-     */
-    public function __construct(JobMap $map)
-    {
-        $this->map = $map;
-    }
-
-    /**
      * @param array $config
      *
-     * @return \App\Services\Components\Sns\SnsQueue|\Illuminate\Contracts\Queue\Queue
+     * @return \Amranidev\MicroBus\Sqs\SqsQueue
      */
     public function connect(array $config)
     {
@@ -37,7 +24,7 @@ class SqsConnector extends AbstractSqsConnector implements ConnectorInterface
         }
 
         return new SqsQueue(
-            new SqsClient($config), $config['queue'], $config['prefix'], $this->map
+            new SqsClient($config), $config['queue'], $config['prefix']
         );
     }
 }

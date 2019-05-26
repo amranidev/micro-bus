@@ -14,7 +14,6 @@ class SnsServiceProvider extends ServiceProvider
     public function boot()
     {
        $this->publishConfiguration();
-       $this->loadFacades();
     }
 
     /**
@@ -61,14 +60,14 @@ class SnsServiceProvider extends ServiceProvider
     protected function registerSnsConnection()
     {
         $this->app->singleton('sns.connection', function ($app) {
-            /** @var \App\Services\Components\Sns\SnsManager $manager */
+            /** @var \Amranidev\MicroBus\Sns\SnsManager $manager */
             $manager = $app['sns'];
             return $manager->connection();
         });
     }
 
     /**
-     * Publish publisher configuration file.
+     * Publish configuration file.
      *
      * @return void
      */
@@ -76,16 +75,6 @@ class SnsServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__.'/../../config/publisher.php';
         $this->publishes([
-            $configPath => config_path('publisher.php'), ]);
-    }
-
-    /**
-     * Load facades.
-     *
-     * @return void
-     */
-    protected function loadFacades()
-    {
-        $this->app->provideFacades(Facades\Publisher::class);
+            $configPath => base_path('config/publisher.php'), ]);
     }
 }
