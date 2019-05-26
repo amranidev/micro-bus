@@ -1,0 +1,31 @@
+<?php
+
+namespace DummyNamespace;
+
+use Amranidev\MicroBus\Sqs\Traits\JobHandler;
+use Amranidev\MicroBus\Sqs\Contracts\Handleable;
+
+class DummyClass implements Handleable
+{
+    use JobHandler;
+
+    /**
+     * @var mixed
+     */
+    public $payload;
+
+    /**
+     * @var \Illuminate\Queue\Jobs\Job
+     */
+    public $job;
+
+    /**
+     * Execute the job.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+         //
+    }
+}
