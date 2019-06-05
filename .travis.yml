@@ -1,0 +1,27 @@
+language: php
+
+sudo: required
+
+php:
+  - 7.1.3
+
+services:
+  - docker
+
+env:
+  - TESTBENCH_VERSION=3.8.*
+
+before_script:
+  - travis_retry composer self-update
+  - travis_retry composer require --prefer-source --no-interaction --dev "orchestra/testbench:${TESTBENCH_VERSION}"
+
+script:
+  - pip install -q localstack; docker pull localstack/localstack; localstack start --docker
+    & sleep 20
+  - pip install -q awscli-local
+  - awslocal kinesis list-streams
+  - awslocal cognito-idp create-user-pool --pool-name p1
+  - export AWS_ACCESS_KEY_ID=foo AWS_SECRET_ACCESS_KEY=bar AWS_DEFAULT_REGION=us-east-1
+  - aws --no-verify-ssl kinesis list-streams
+  - composer validate
+  - vendor/bin/phpunit
