@@ -17,6 +17,6 @@ before_script:
 
 script:
   - docker pull localstack/localstack
-  - docker-compose up -d
+  - docker-compose up
   - composer validate
   - vendor/bin/phpunit
