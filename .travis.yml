@@ -16,7 +16,7 @@ before_script:
   - travis_retry composer require --prefer-source --no-interaction --dev "orchestra/testbench:${TESTBENCH_VERSION}"
 
 script:
-  - docker pull localstack/localstack
+  - docker pull localstack/localstack --detach
     & sleep 20
   - docker run localstack/localstack
   - composer validate
