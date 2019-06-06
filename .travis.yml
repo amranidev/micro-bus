@@ -17,6 +17,6 @@ before_script:
 
 script:
   - docker pull localstack/localstack
-  - docker run -it -p 4567-4593:4567-4593 --detach localstack/localstack
+  - docker-compose up -d
   - composer validate
   - vendor/bin/phpunit
