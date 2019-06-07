@@ -2,10 +2,10 @@
 
 namespace Amranidev\MicroBus\Tests\Sqs;
 
-use Amranidev\MicroBus\Sqs\Contracts\Handleable;
+use Illuminate\Container\Container;
 use Amranidev\MicroBus\Sqs\Traits\JobHandler as Handler;
 
-class JobHandler implements Handleable
+class JobHandler
 {
     use Handler;
 
@@ -15,6 +15,11 @@ class JobHandler implements Handleable
     public $payload;
 
     /**
+     * @var
+     */
+    public $container;
+
+    /**
      * @var \Illuminate\Queue\Jobs\Job
      */
     public $job;
@@ -22,10 +27,12 @@ class JobHandler implements Handleable
     /**
      * Execute the job.
      *
+     * @param \Illuminate\Container\Container $container
+     *
      * @return mixed
      */
-    public function handle()
+    public function handle(Container $container)
     {
-        //
+        $this->container = $container;
     }
 }
