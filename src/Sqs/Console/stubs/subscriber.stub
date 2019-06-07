@@ -3,9 +3,8 @@
 namespace DummyNamespace;
 
 use Amranidev\MicroBus\Sqs\Traits\JobHandler;
-use Amranidev\MicroBus\Sqs\Contracts\Handleable;
 
-class DummyClass implements Handleable
+class DummyClass
 {
     use JobHandler;
 
