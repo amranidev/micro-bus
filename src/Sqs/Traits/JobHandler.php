@@ -26,7 +26,9 @@ trait JobHandler
         $this->setJob($job);
         $this->setPayload($data);
 
-        $this->handle();
+        $container = $job->getContainer();
+
+        $container->call([$this, 'handle']);
 
         $job->delete();
     }
