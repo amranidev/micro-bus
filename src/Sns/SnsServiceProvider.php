@@ -75,6 +75,6 @@ class SnsServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__.'/../../config/publisher.php';
         $this->publishes([
-            $configPath => base_path('config/publisher.php'), ]);
+            $configPath => base_path('config/publisher.php'), ], 'publisher');
     }
 }
