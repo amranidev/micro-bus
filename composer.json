@@ -25,5 +25,15 @@
     "psr-4": {
       "Amranidev\\MicroBus\\Tests\\": "tests/"
     }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Amranidev\\MicroBus\\MicroBusServiceProvider"
+      ],
+      "aliases": {
+        "Publisher": "Amranidev\\MicroBus\\Sns\\Facades\\Publisher"
+      }
+    }
   }
 }
