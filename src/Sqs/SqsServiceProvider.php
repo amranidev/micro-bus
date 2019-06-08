@@ -44,10 +44,7 @@ class SqsServiceProvider extends ServiceProvider
     protected function addSqsConnector()
     {
         $this->app->afterResolving(QueueManager::class, function (QueueManager $manager) {
-            /** @var \Illuminate\Config\Repository $config */
-            $config = $this->app->make(Repository::class);
-
-            $manager->addConnector('subscriber', function () use ($config) {
+            $manager->addConnector('subscriber', function () {
                 return new SqsConnector;
             });
         });
@@ -62,7 +59,7 @@ class SqsServiceProvider extends ServiceProvider
     {
         $configPath = __DIR__ . '/../../config/subscriber.php';
         $this->publishes([
-            $configPath => base_path('config/subscriber.php'),]);
+            $configPath => base_path('config/subscriber.php'),], 'subscriber');
     }
 
     /**
