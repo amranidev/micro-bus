@@ -2,9 +2,9 @@
 
 return [
     'sns'    => [
-        'key'    => env('SNS_KEY'),
-        'secret' => env('SNS_SECRET'),
-        'region' => env('SNS_REGION'),
+        'key'    => env('PUBLISHER_SNS_KEY'),
+        'secret' => env('PUBLISHER_SNS_SECRET'),
+        'region' => env('PUBLISHER_SNS_REGION'),
     ],
     'events' => [
         'user_created' => 'ARN'
