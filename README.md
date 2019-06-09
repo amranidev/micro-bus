@@ -1,10 +1,12 @@
 <h1 align="center">
    Build your laravel microservices with micro-bus
-  
+</h1>
+
+<p align="center">
   <a href="https://travis-ci.org/amranidev/micro-bus" target="_blank">
     <img src="https://travis-ci.org/amranidev/micro-bus.svg?branch=master">
   </a>
-</h1>
+</p>
 
 ## What is micro-bus?
 
