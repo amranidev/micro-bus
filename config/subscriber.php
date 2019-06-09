@@ -2,6 +2,6 @@
 
 return [
     'subscribers' => [
-        'class' => 'ARN'
-    ]
+        'class' => 'ARN',
+    ],
 ];

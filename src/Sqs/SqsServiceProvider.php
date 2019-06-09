@@ -2,7 +2,6 @@
 
 namespace Amranidev\MicroBus\Sqs;
 
-use Illuminate\Config\Repository;
 use Illuminate\Queue\QueueManager;
 use Illuminate\Support\ServiceProvider;
 use Amranidev\MicroBus\Sqs\Console\JobSubscriberCommand;
@@ -45,7 +44,7 @@ class SqsServiceProvider extends ServiceProvider
     {
         $this->app->afterResolving(QueueManager::class, function (QueueManager $manager) {
             $manager->addConnector('subscriber', function () {
-                return new SqsConnector;
+                return new SqsConnector();
             });
         });
     }
@@ -57,9 +56,9 @@ class SqsServiceProvider extends ServiceProvider
      */
     protected function publishConfiguration()
     {
-        $configPath = __DIR__ . '/../../config/subscriber.php';
+        $configPath = __DIR__.'/../../config/subscriber.php';
         $this->publishes([
-            $configPath => base_path('config/subscriber.php'),], 'subscriber');
+            $configPath => base_path('config/subscriber.php'), ], 'subscriber');
     }
 
     /**
@@ -71,6 +70,7 @@ class SqsServiceProvider extends ServiceProvider
     {
         $this->app->singleton('jobmap', function ($app) {
             $map = config('subscriber.subscribers');
+
             return new JobMap($map);
         });
     }

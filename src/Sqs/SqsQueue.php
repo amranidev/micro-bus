@@ -23,7 +23,7 @@ class SqsQueue extends AbstractSqsQueue
      * SnsQueue constructor.
      *
      * @param \Aws\Sqs\SqsClient $sqs
-     * @param string $default
+     * @param string             $default
      * @param $prefix
      */
     public function __construct(SqsClient $sqs, string $default, $prefix)
@@ -62,7 +62,7 @@ class SqsQueue extends AbstractSqsQueue
         $message = $this->pipe($response->toArray());
 
         if (is_null($message)) {
-            return null;
+            return;
         }
 
         return new SqsJob(

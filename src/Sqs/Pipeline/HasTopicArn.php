@@ -7,7 +7,7 @@ class HasTopicArn
     /**
      * Determine if the TopicArn exists in the response body.
      *
-     * @param array $body
+     * @param array    $body
      * @param \Closure $next
      *
      * @return mixed|null
@@ -15,7 +15,7 @@ class HasTopicArn
     public function handle($body, \Closure $next)
     {
         if (!isset($body['TopicArn'])) {
-            return null;
+            return;
         }
 
         return $next($body);

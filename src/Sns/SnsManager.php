@@ -35,8 +35,9 @@ class SnsManager
      */
     public function connection()
     {
-        if (!$this->connection)
+        if (!$this->connection) {
             $this->connection = $this->resolve();
+        }
 
         return $this->connection;
     }
@@ -49,7 +50,8 @@ class SnsManager
     protected function resolve()
     {
         $config = $this->getConfig();
-        return (new SnsConnector)->connect($config);
+
+        return (new SnsConnector())->connect($config);
     }
 
     /**
