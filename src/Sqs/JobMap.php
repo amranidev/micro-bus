@@ -26,15 +26,17 @@ class JobMap
      *
      * @param string $topic
      *
-     * @return string
      * @throws \Exception
+     *
+     * @return string
      */
     public function fromTopic(string $topic): string
     {
         $job = array_search($topic, $this->map);
-        if (! $job) {
+        if (!$job) {
             throw new \Exception("Topic {$topic} doesn't exists.");
         }
+
         return $job;
     }
 }

@@ -21,7 +21,7 @@ class Publisher
     /**
      * The message is serializable by default.
      *
-     * @var boolean
+     * @var bool
      */
     protected $serializable = true;
 
@@ -41,10 +41,11 @@ class Publisher
      * Publish the message to SNS.
      *
      * @param string $topic
-     * @param mixed $message
+     * @param mixed  $message
+     *
+     * @throws \Exception
      *
      * @return \Aws\Result
-     * @throws \Exception
      */
     public function publish($topic, $message)
     {
@@ -71,7 +72,7 @@ class Publisher
     /**
      * Determine if the message is serializable.
      *
-     * @return boolean
+     * @return bool
      */
     public function isSerializable()
     {
@@ -99,8 +100,9 @@ class Publisher
      *
      * @param string $topic
      *
-     * @return mixed
      * @throws \Exception
+     *
+     * @return mixed
      */
     protected function getTopicArn($topic)
     {

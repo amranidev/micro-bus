@@ -7,7 +7,7 @@ class VerifySubscription
     /**
      * Determine if the subscriber is subscribed to the incoming topic.
      *
-     * @param array $body
+     * @param array    $body
      * @param \Closure $next
      *
      * @return null
@@ -21,7 +21,7 @@ class VerifySubscription
             // Get the job handler Through the the JonMap.
             $handler = $map->fromTopic($body['TopicArn']);
         } catch (\Exception $e) {
-            return null;
+            return;
         }
 
         $body['handler'] = $handler;

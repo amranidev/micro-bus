@@ -21,7 +21,7 @@ trait InteractsWithSqs
         $config = $this->getConfig();
 
         $queueName = $config->get('queue.connections.subscriber.queue');
-        $queueEndpoint = $config->get('queue.connections.subscriber.prefix') . $queueName;
+        $queueEndpoint = $config->get('queue.connections.subscriber.prefix').$queueName;
 
         $client->createQueue(['QueueName' => $queueName]);
         $client->purgeQueue(['QueueUrl' => $queueEndpoint]);
@@ -51,7 +51,7 @@ trait InteractsWithSqs
             'credentials' => [
                 'key'    => 'foo',
                 'secret' => 'bar',
-            ]
+            ],
         ]);
 
         return $client;

@@ -13,7 +13,7 @@ class SnsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-       $this->publishConfiguration();
+        $this->publishConfiguration();
     }
 
     /**
@@ -48,7 +48,7 @@ class SnsServiceProvider extends ServiceProvider
     protected function registerSnsConnector()
     {
         $this->app->singleton('sns.connector', function () {
-            return new SnsConnector;
+            return new SnsConnector();
         });
     }
 
@@ -62,6 +62,7 @@ class SnsServiceProvider extends ServiceProvider
         $this->app->singleton('sns.connection', function ($app) {
             /** @var \Amranidev\MicroBus\Sns\SnsManager $manager */
             $manager = $app['sns'];
+
             return $manager->connection();
         });
     }

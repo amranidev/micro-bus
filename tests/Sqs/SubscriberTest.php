@@ -24,13 +24,12 @@ class SubscriberTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
     }
 
     /** @test */
     public function work_incoming_messages_published_by_sns()
     {
-        $this->sendMessage(file_get_contents(__DIR__ . '/messages/message.json'));
+        $this->sendMessage(file_get_contents(__DIR__.'/messages/message.json'));
 
         // Listen for the job to be processed.
         $this->app['events']->listen(JobProcessed::class, function ($event) {
@@ -70,7 +69,7 @@ class SubscriberTest extends TestCase
         /** @var \Illuminate\Config\Repository $config */
         $config = $this->app['config'];
 
-        $this->sendMessage(file_get_contents(__DIR__ . '/messages/message.json'));
+        $this->sendMessage(file_get_contents(__DIR__.'/messages/message.json'));
 
         // Listen for the job to be processed.
         $this->app['events']->listen(JobProcessed::class, function ($event) {
@@ -78,7 +77,7 @@ class SubscriberTest extends TestCase
         });
 
         // Set local subscriber class.
-        $config->set('subscriber.subscribers.' . JobHandler::class, 'arn:aws:sns:eu-west-1:s1111111111:my-topic-arn2');
+        $config->set('subscriber.subscribers.'.JobHandler::class, 'arn:aws:sns:eu-west-1:s1111111111:my-topic-arn2');
         $this->artisan('queue:work', ['--once' => true]);
 
         // The worker should ignore the message and the job should be null.
@@ -93,7 +92,7 @@ class SubscriberTest extends TestCase
             $this->job = $event->job;
         });
 
-        $this->sendMessage(file_get_contents(__DIR__ . '/messages/without_topic_arn.json'));
+        $this->sendMessage(file_get_contents(__DIR__.'/messages/without_topic_arn.json'));
 
         $this->artisan('queue:work', ['--once' => true]);
 

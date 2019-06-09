@@ -13,14 +13,14 @@ trait JobHandler
      * Execute the job.
      *
      * @param \Illuminate\Queue\Jobs\Job $job
-     * @param mixed|null $data
+     * @param mixed|null                 $data
      *
      * @throws \Exception
      */
     public function fire(Job $job, $data)
     {
         if (!method_exists($this, 'handle')) {
-            throw new \Exception(__CLASS__ . '@handle does not exists!');
+            throw new \Exception(__CLASS__.'@handle does not exists!');
         }
 
         $this->setJob($job);
