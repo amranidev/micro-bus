@@ -3,6 +3,9 @@
 </h1>
 
 <p align="center">
+   <a href="https://github.styleci.io/repos/190308907">
+      <img src="https://github.styleci.io/repos/190308907/shield?branch=master" alt="StyleCI">
+   </a>
   <a href="https://travis-ci.org/amranidev/micro-bus" target="_blank">
     <img src="https://travis-ci.org/amranidev/micro-bus.svg?branch=master">
   </a>
@@ -30,7 +33,7 @@
 
 ### Laravel.
 
-1. Install the package, `composer require amranidev/micro-bus`
+1. Install the package, `composer require amranidev/micro-bus`.
 
 2. Publish the subscriber config file, `php artisan vendor:publish --tag=subscriber`.
 
