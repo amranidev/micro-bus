@@ -1,19 +1,25 @@
 language: php
 
 sudo: required
-
-php:
-  - 7.2
-
+    
 services:
   - docker
 
-env:
-  - TESTBENCH_VERSION=3.8.*
+matrix:
+  fast_finish: true
+  include:
+  - php: 7.1.3
+    env: TESTBENCH_VERSION=3.7.7
+  - php: 7.1.3
+    env: TESTBENCH_VERSION=3.8.3
+  - php: 7.2
+    env: TESTBENCH_VERSION=3.8.3
+  - php: 7.3
+    env: TESTBENCH_VERSION=3.8.3
 
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer require --prefer-source --no-interaction --dev "orchestra/testbench:${TESTBENCH_VERSION}"
+  - travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest
+  - travis_retry composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
 
 script:
   - docker pull localstack/localstack
