@@ -73,7 +73,86 @@ Congratulations you have successfully installed **micro-bus** :rocket:
 
 ### Lumen.
 
-Coming soon..
+
+1. Install the package, `composer require amranidev/micro-bus`.
+
+2. Add the subscriber and the publisher environment variables.
+
+
+   - In the `.env` file add.
+
+   ```
+   SUBSCRIBER_SQS_KEY=<SQS-KEY-AWS>
+   SUBSCRIBER_SQS_SECRET=<SQS-SECRET-AWS>
+   SUBSCRIBER_SQS_PREFIX=https://sqs.<sqs-region>.amazonaws.com/<project-id>
+   SUBSCRIBER_SQS_QUEUE=<QUEUE-NAME-AWS>
+   SUBSCRIBER_SQS_REGION=<SQS-REGION-AWS>
+    
+   PUBLISHER_SNS_KEY=<SNS-KEY-AWS>
+   PUBLISHER_SNS_SECRET=<SNS-KEY-AWS>
+   PUBLISHER_SNS_REGION=<SNS-REGION-AWS>
+   ```
+
+3. Create `config` folder in the root directory.
+
+4. Create `subscriber.php` in the config folder.
+
+```php
+<?php
+
+return [
+   'subscribers' => [
+      '__CLASSNAME__' => 'TopicArn'
+   ]
+];
+```
+
+5. Create `publisher.php` in the config folder.
+
+```php
+<?php
+
+return [
+    'sns'    => [
+        'key'    => env('PUBLISHER_SNS_KEY'),
+        'secret' => env('PUBLISHER_SNS_SECRET'),
+        'region' => env('PUBLISHER_SNS_REGION'),
+    ],
+    'events' => [
+        'user_created' => 'arn:aws:sns:eu-west-1:111111111111:user_created'
+    ]
+];
+
+```
+
+6. Create `queue.php` in the config folder.
+
+Copy the same `queue.php` from [laravel/laravel](https://github.com/laravel/laravel/blob/master/config/queue.php) and add the subscriber configuration into `connections`.
+
+```php
+'subscriber' => [
+    'driver'      => 'subscriber',
+    'key'         => env('SUBSCRIBER_SQS_KEY', 'your-public-key'),
+    'secret'      => env('SUBSCRIBER_SQS_SECRET', 'your-secret-key'),
+    'prefix'      => env('SUBSCRIBER_SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
+    'queue'       => env('SUBSCRIBER_SQS_QUEUE', 'your-queue-name'),
+    'region'      => env('SUBSCRIBER_SQS_REGION', 'us-east-1'),
+    'retry_after' => 90,
+],
+
+```
+7. Configure `subscriber`, `publisher`, `queue` and register the ServiceProvider in `bootstrap/app.php`.
+
+```php
+
+$app->configure('publisher')
+$app->configure('subscriber');
+$app->configure('queue');
+
+$app->register(Amranidev\MicroBus\MicroBusServiceProvider::class);
+```
+
+Congratulations you have successfully installed **micro-bus** in lumen :rocket:
 
 ## Usage.
 
