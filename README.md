@@ -283,7 +283,9 @@ Thank you for considering contributing to this project! The contribution guide c
 
 ## Testing.
 
-- Install [localstack/localstack](https://github.com/localstack/localstack).
+- Pull the [localstack/localstack](https://github.com/localstack/localstack) docker image.
+
+`docker pull localstack/localstack`
 
 Create a `docker-compose.yml` file.
 
