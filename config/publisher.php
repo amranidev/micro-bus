@@ -7,6 +7,6 @@ return [
         'region' => env('PUBLISHER_SNS_REGION'),
     ],
     'events' => [
-        'user_created' => 'ARN',
+        'user_created' => 'TopicArn',
     ],
 ];
