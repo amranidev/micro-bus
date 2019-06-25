@@ -258,7 +258,7 @@ public function handle(MailingList $mailingList)
 {
     $user = $this->payload;
     
-    // MailingList resolved automatically from the container.
+    // MailingList is resolved automatically from the container.
     $mailingList->addUser($user->name, $user->email);
 }
 ```
