@@ -18,7 +18,7 @@ class SqsJob extends AbstractSqsJob
     protected $handler;
 
     /**
-     * SnsJob constructor.
+     * SqsJob constructor.
      *
      * @param $container
      * @param \Aws\Sqs\SqsClient $sqs
