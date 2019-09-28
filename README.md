@@ -281,6 +281,11 @@ And run the `queue:work` command, `php artisan queue:work --queue=subscriber`,
 
 Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
 
+
+## Alternative (GCP).
+
+[cloud-pubsub](https://github.com/gdg-tangier/cloud-pubsub)
+
 ## Testing.
 
 - Pull the [localstack/localstack](https://github.com/localstack/localstack) docker image.
