@@ -82,6 +82,8 @@ class SqsQueue extends AbstractSqsQueue
     {
         return (new Pipeline($this->container))->send($response)
             ->through($this->pipeline)
-            ->thenReturn();
+            ->then(function ($message) {
+                return $message;
+            });
     }
 }
