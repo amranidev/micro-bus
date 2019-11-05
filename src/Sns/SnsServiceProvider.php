@@ -3,6 +3,7 @@
 namespace Amranidev\MicroBus\Sns;
 
 use Carbon\Laravel\ServiceProvider;
+use Amranidev\MicroBus\Sns\Console\PublishMessage;
 
 class SnsServiceProvider extends ServiceProvider
 {
@@ -14,6 +15,7 @@ class SnsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishConfiguration();
+        $this->commands([PublishMessage::class]);
     }
 
     /**
