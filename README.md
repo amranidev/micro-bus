@@ -275,16 +275,16 @@ return [
 ];
 ```
 
-And run the `queue:work` command, `php artisan queue:work --queue=subscriber`,
+And run the `queue:work` command, `php artisan queue:work <connection-name>`,
 
 ## Contributing.
 
 Thank you for considering contributing to this project! The contribution guide can be found in [Contribution guide](CONTRIBUTING.md).
 
 
-## Alternative (GCP).
+## Alternative (Google Cloud Platform).
 
-[cloud-pubsub](https://github.com/gdg-tangier/cloud-pubsub)
+[gdg-tangier/cloud-pubsub](https://github.com/gdg-tangier/cloud-pubsub)
 
 ## Testing.
 
