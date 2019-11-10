@@ -3,9 +3,7 @@
 namespace Amranidev\MicroBus;
 
 /**
- * Class MicroBus
- *
- * @package Amranidev\MicroBus
+ * Class MicroBus.
  */
 class MicroBus
 {
