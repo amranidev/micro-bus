@@ -202,6 +202,16 @@ Publisher::publish('user_created', $user);
 ...
 ```
 
+Alternatively you can publish messages with:
+
+- Service container: 
+
+`app('sns.connection')->publish('event', $data);`
+
+- Artisan command: 
+
+`php artisan bus:publish <data> <eventOrTopicname>`
+
 #### Set up Lumen (Microservice B).
 
 Now, let's create the subscriber class which will be listening for **A** in **B**.
