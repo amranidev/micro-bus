@@ -66,8 +66,12 @@ class SqsQueue extends AbstractSqsQueue
         }
 
         return new SqsJob(
-            $this->container, $this->sqs, $response['Messages'][0],
-            $this->connectionName, $queue, $message['handler']
+            $this->container,
+            $this->sqs,
+            $response['Messages'][0],
+            $this->connectionName,
+            $queue,
+            $message['handler']
         );
     }
 
