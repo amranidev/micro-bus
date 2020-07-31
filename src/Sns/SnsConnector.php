@@ -33,7 +33,6 @@ class SnsConnector
     public function getDefaultConfiguration($config)
     {
         return array_merge([
-            'profile' => 'default',
             'version' => 'latest',
         ], $config);
     }
