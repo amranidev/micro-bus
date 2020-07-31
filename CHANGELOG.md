@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.1.6 (2020-07-31)
+
+### Fixed
+
+- Remove default profile from SNS connector default configuration.
+
 ## v0.1.5 (2019-11-09)
 
 ### Added
