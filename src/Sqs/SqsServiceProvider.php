@@ -47,6 +47,12 @@ class SqsServiceProvider extends ServiceProvider
                 return new SqsConnector();
             });
         });
+
+        $this->app->afterResolving(QueueManager::class, function (QueueManager $manager) {
+            $manager->addConnector('subscriber-fifo', function () {
+                return new SqsFifoConnector();
+            });
+        });
     }
 
     /**

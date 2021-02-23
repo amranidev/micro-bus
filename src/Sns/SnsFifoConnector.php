@@ -5,14 +5,14 @@ namespace Amranidev\MicroBus\Sns;
 use Aws\Sns\SnsClient;
 use Illuminate\Support\Arr;
 
-class SnsConnector
+class SnsFifoConnector
 {
     /**
      * Establish an SNS Connection.
      *
      * @param array $config
      *
-     * @return \Amranidev\MicroBus\Sns\Publisher
+     * @return \Amranidev\MicroBus\Sns\PublisherFifo
      */
     public function connect($config)
     {
@@ -22,7 +22,7 @@ class SnsConnector
             $config['credentials'] = Arr::only($config, ['key', 'secret']);
         }
 
-        return new Publisher(new SnsClient($config));
+        return new PublisherFifo(new SnsClient($config));
     }
 
     /**
@@ -34,8 +34,11 @@ class SnsConnector
      */
     public function getDefaultConfiguration($config)
     {
-        return array_merge([
-            'version' => 'latest',
-        ], $config);
+        return array_merge(
+            [
+                'version' => 'latest',
+            ],
+            $config
+        );
     }
 }
