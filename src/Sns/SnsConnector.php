@@ -18,7 +18,9 @@ class SnsConnector
     {
         $config = $this->getDefaultConfiguration($config);
 
-        $config['credentials'] = Arr::only($config, ['key', 'secret']);
+        if (!empty($config['key']) && empty($config['secret'])) {
+            $config['credentials'] = Arr::only($config, ['key', 'secret']);
+        }
 
         return new Publisher(new SnsClient($config));
     }
