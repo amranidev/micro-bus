@@ -40,7 +40,7 @@ abstract class BaseSns
     /**
      * Set message serialization to false.
      *
-     * @return \Amranidev\MicroBus\Sns\Publisher
+     * @return BaseSns
      */
     public function withoutSerializing()
     {
