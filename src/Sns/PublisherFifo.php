@@ -7,13 +7,15 @@ use Ramsey\Uuid\Uuid;
 class PublisherFifo extends BaseSns
 {
     /**
-     * Publish Message to SNS fifo
+     * Publish Message to SNS fifo.
      *
      * @param $topic
      * @param $message
      * @param array $payload
-     * @return \Aws\Result
+     *
      * @throws \Exception
+     *
+     * @return \Aws\Result
      */
     public function publish($topic, $message, array $payload = [])
     {
