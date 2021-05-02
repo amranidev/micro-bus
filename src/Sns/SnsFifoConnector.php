@@ -3,12 +3,11 @@
 namespace Amranidev\MicroBus\Sns;
 
 use Aws\Sns\SnsClient;
-use Illuminate\Support\Arr;
 
-class SnsFifoConnector
+class SnsFifoConnector extends BaseSnsConnector
 {
     /**
-     * Establish an SNS Connection.
+     * Establish a new fifo SNS Connection.
      *
      * @param array $config
      *
@@ -16,29 +15,6 @@ class SnsFifoConnector
      */
     public function connect($config)
     {
-        $config = $this->getDefaultConfiguration($config);
-
-        if (!empty($config['key']) && !empty($config['secret'])) {
-            $config['credentials'] = Arr::only($config, ['key', 'secret']);
-        }
-
-        return new PublisherFifo(new SnsClient($config));
-    }
-
-    /**
-     * Get the default configuration.
-     *
-     * @param array $config
-     *
-     * @return array
-     */
-    public function getDefaultConfiguration($config)
-    {
-        return array_merge(
-            [
-                'version' => 'latest',
-            ],
-            $config
-        );
+        return new PublisherFifo(new SnsClient($this->prepareCredentialsConfig($config)));
     }
 }
