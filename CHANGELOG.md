@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v0.2.7 (2021-05-2)
+
+### Added
+
+- Add FIFO support to SNS.
+- Add FIFO support to SQS.
+
 ## v0.1.6 (2020-07-31)
 
 ### Fixed
