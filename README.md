@@ -44,6 +44,8 @@
    - In the `.env` file add.
 
    ```
+   # Standard SQS keys.
+   
    SUBSCRIBER_SQS_KEY=<SQS-KEY-AWS>
    SUBSCRIBER_SQS_SECRET=<SQS-SECRET-AWS>
    SUBSCRIBER_SQS_PREFIX=https://sqs.<sqs-region>.amazonaws.com/<project-id>
@@ -53,11 +55,27 @@
    PUBLISHER_SNS_KEY=<SNS-KEY-AWS>
    PUBLISHER_SNS_SECRET=<SNS-KEY-AWS>
    PUBLISHER_SNS_REGION=<SNS-REGION-AWS>
+   
+   # FIFO SQS Keys.
+   
+   SUBSCRIBER_FIFO_SQS_KEY=<SQS-KEY-AWS>
+   SUBSCRIBER_FIFO_SQS_SECRET=<SQS-SECRET-AWS>
+   SUBSCRIBER_FIFO_SQS_PREFIX=https://sqs.<sqs-region>.amazonaws.com/<project-id>
+   SUBSCRIBER_FIFO_SQS_QUEUE=<QUEUE-NAME-AWS>
+   SUBSCRIBER_FIFO_SQS_REGION=<SQS-REGION-AWS>
+   
+   # SNS Keys.
+   
+   PUBLISHER_SNS_KEY=<SNS-KEY-AWS>
+   PUBLISHER_SNS_SECRET=<SNS-KEY-AWS>
+   PUBLISHER_SNS_REGION=<SNS-REGION-AWS> 
    ```
    
  5. Add the Queue connection configuration in `config/queue.php`.
  
-    ```
+    ```php
+    // Standard SQS configuration.
+    
     'subscriber' => [
         'driver'      => 'subscriber',
         'key'         => env('SUBSCRIBER_SQS_KEY', 'your-public-key'),
@@ -65,6 +83,17 @@
         'prefix'      => env('SUBSCRIBER_SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
         'queue'       => env('SUBSCRIBER_SQS_QUEUE', 'your-queue-name'),
         'region'      => env('SUBSCRIBER_SQS_REGION', 'us-east-1'),
+        'retry_after' => 90,
+    ],
+    
+    // FIFO SQS configuration.
+    'subscriber-fifo' => [
+        'driver'      => 'subscriber',
+        'key'         => env('SUBSCRIBER_FIFO_SQS_KEY', 'your-public-key'),
+        'secret'      => env('SUBSCRIBER_FIFO_SQS_SECRET', 'your-secret-key'),
+        'prefix'      => env('SUBSCRIBER_FIFO_SQS_PREFIX', 'https://sqs.us-east-1.amazonaws.com/your-account-id'),
+        'queue'       => env('SUBSCRIBER_FIFO_SQS_QUEUE', 'your-queue-name'),
+        'region'      => env('SUBSCRIBER_FIFO_SQS_REGION', 'us-east-1'),
         'retry_after' => 90,
     ],
     ```
@@ -206,7 +235,13 @@ Alternatively you can publish messages with:
 
 - Service container: 
 
-`app('sns.connection')->publish('event', $data);`
+```php
+// Standard SNS.
+app('sns.connection')->publish('event', $data);
+
+// Fifo SNS.
+app('sns.fifo.connector')->publish('event', $data);
+```
 
 - Artisan command: 
 

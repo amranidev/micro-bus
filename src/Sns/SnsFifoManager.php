@@ -2,17 +2,17 @@
 
 namespace Amranidev\MicroBus\Sns;
 
-class SnsManager extends Manager
+class SnsFifoManager extends Manager
 {
     /**
      * Resolve publisher.
      *
-     * @return \Amranidev\MicroBus\Sns\Publisher
+     * @return \Amranidev\MicroBus\Sns\PublisherFifo
      */
     protected function resolve()
     {
         $config = $this->getConfig();
 
-        return (new SnsConnector())->connect($config);
+        return (new SnsFifoConnector())->connect($config);
     }
 }

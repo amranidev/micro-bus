@@ -31,7 +31,8 @@
         "Amranidev\\MicroBus\\MicroBusServiceProvider"
       ],
       "aliases": {
-        "Publisher": "Amranidev\\MicroBus\\Sns\\Facades\\Publisher"
+        "Publisher": "Amranidev\\MicroBus\\Sns\\Facades\\Publisher",
+        "PublisherFifo": "Amranidev\\MicroBus\\Sns\\Facades\\PublisherFifo"
       }
     }
   }
