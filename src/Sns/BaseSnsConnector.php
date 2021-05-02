@@ -30,7 +30,7 @@ abstract class BaseSnsConnector
             $config['credentials'] = Arr::only($config, ['key', 'secret']);
         }
 
-       return $config;
+        return $config;
     }
 
     /**
