@@ -3,12 +3,11 @@
 namespace Amranidev\MicroBus\Sns;
 
 use Aws\Sns\SnsClient;
-use Illuminate\Support\Arr;
 
-class SnsConnector
+class SnsConnector extends BaseSnsConnector
 {
     /**
-     * Establish an SNS Connection.
+     * Establish a new SNS Connection.
      *
      * @param array $config
      *
@@ -16,26 +15,6 @@ class SnsConnector
      */
     public function connect($config)
     {
-        $config = $this->getDefaultConfiguration($config);
-
-        if (!empty($config['key']) && !empty($config['secret'])) {
-            $config['credentials'] = Arr::only($config, ['key', 'secret']);
-        }
-
-        return new Publisher(new SnsClient($config));
-    }
-
-    /**
-     * Get the default configuration.
-     *
-     * @param array $config
-     *
-     * @return array
-     */
-    public function getDefaultConfiguration($config)
-    {
-        return array_merge([
-            'version' => 'latest',
-        ], $config);
+        return new Publisher(new SnsClient($this->prepareCredentialsConfig($config)));
     }
 }
