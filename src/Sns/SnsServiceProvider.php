@@ -41,7 +41,7 @@ class SnsServiceProvider extends ServiceProvider
             return new SnsManager($app);
         });
 
-        $this->app->singleton('sns-fifo', function ($app) {
+        $this->app->singleton('sns.fifo', function ($app) {
             return new SnsFifoManager($app);
         });
     }
@@ -57,7 +57,7 @@ class SnsServiceProvider extends ServiceProvider
             return new SnsConnector();
         });
 
-        $this->app->singleton('sns.connector-fifo', function () {
+        $this->app->singleton('sns.fifo.connector', function () {
             return new SnsFifoConnector();
         });
     }
@@ -76,9 +76,9 @@ class SnsServiceProvider extends ServiceProvider
             return $manager->connection();
         });
 
-        $this->app->singleton('sns.connection-fifo', function ($app) {
+        $this->app->singleton('sns.fifo.connection', function ($app) {
             /** @var \Amranidev\MicroBus\Sns\SnsManager $manager */
-            $manager = $app['sns-fifo'];
+            $manager = $app['sns.fifo'];
 
             return $manager->connection();
         });
