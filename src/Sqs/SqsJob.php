@@ -44,8 +44,22 @@ class SqsJob extends AbstractSqsJob
 
         $payload['job'] = $this->handler;
 
-        $payload['data'] = unserialize($payload['Message']);
+        if ($this->isJson($payload['Message']) === true) {
+            $payload['data'] = json_decode($payload['Message'], true);
+        } else {
+            $payload['data'] = unserialize($payload['Message']);
+        }
 
         return $payload;
+    }
+
+    /**
+     * @param $message
+     * @return bool
+     */
+    private function isJson($message)
+    {
+        $result = json_decode(trim($message, '"'), true);
+        return is_array($result);
     }
 }
