@@ -55,11 +55,13 @@ class SqsJob extends AbstractSqsJob
 
     /**
      * @param $message
+     *
      * @return bool
      */
     private function isJson($message)
     {
         $result = json_decode(trim($message, '"'), true);
+
         return is_array($result);
     }
 }
