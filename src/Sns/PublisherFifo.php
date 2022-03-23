@@ -3,6 +3,7 @@
 namespace Amranidev\MicroBus\Sns;
 
 use Ramsey\Uuid\Uuid;
+use Illuminate\Support\Str;
 
 class PublisherFifo extends BaseSns
 {
@@ -29,6 +30,12 @@ class PublisherFifo extends BaseSns
                     'TopicArn'               => $topic,
                     'MessageGroupId'         => Uuid::uuid4()->toString(),
                     'MessageDeduplicationId' => base64_encode($message),
+                    'MessageAttributes' => [
+                        'MICRO_BUS.JOB_UUID' => [
+                            'DataType' => 'String',
+                            'StringValue' => (string) Str::uuid(),
+                        ]
+                    ],
                 ]
             )
                 ->merge($payload)
