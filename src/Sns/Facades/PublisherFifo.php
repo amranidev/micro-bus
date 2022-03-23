@@ -16,6 +16,6 @@ class PublisherFifo extends Facade
      */
     public static function getFacadeAccessor()
     {
-        return 'sns.connection-fifo';
+        return 'sns.fifo.connection';
     }
 }
