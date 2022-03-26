@@ -2,6 +2,8 @@
 
 namespace Amranidev\MicroBus\Sns;
 
+use Illuminate\Support\Str;
+
 class Publisher extends BaseSns
 {
     /**
@@ -21,6 +23,12 @@ class Publisher extends BaseSns
         return $this->sns->publish([
             'Message'  => $this->prepareMessage($message),
             'TopicArn' => $topic,
+            'MessageAttributes' => [
+                'MICRO_BUS.JOB_UUID' => [
+                    'DataType' => 'String',
+                    'StringValue' => (string) Str::uuid(),
+                ]
+            ],
         ]);
     }
 }
