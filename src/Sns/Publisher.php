@@ -21,13 +21,13 @@ class Publisher extends BaseSns
         $topic = $this->getTopicArn($topic);
 
         return $this->sns->publish([
-            'Message'  => $this->prepareMessage($message),
-            'TopicArn' => $topic,
+            'Message'           => $this->prepareMessage($message),
+            'TopicArn'          => $topic,
             'MessageAttributes' => [
                 'MICRO_BUS.JOB_UUID' => [
-                    'DataType' => 'String',
+                    'DataType'    => 'String',
                     'StringValue' => (string) Str::uuid(),
-                ]
+                ],
             ],
         ]);
     }

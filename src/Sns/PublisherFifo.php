@@ -30,11 +30,11 @@ class PublisherFifo extends BaseSns
                     'TopicArn'               => $topic,
                     'MessageGroupId'         => Uuid::uuid4()->toString(),
                     'MessageDeduplicationId' => base64_encode($message),
-                    'MessageAttributes' => [
+                    'MessageAttributes'      => [
                         'MICRO_BUS.JOB_UUID' => [
-                            'DataType' => 'String',
+                            'DataType'    => 'String',
                             'StringValue' => (string) Str::uuid(),
-                        ]
+                        ],
                     ],
                 ]
             )
