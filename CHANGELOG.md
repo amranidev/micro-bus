@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## v0.3.1 (2022-03-26)
+
+### Added
+
+- Support Laravel Queue UUID
+
+### Fixed
+
+- Bugfix on the PublisherFifo facade
+
 ## v0.2.7 (2021-05-2)
 
 ### Added
