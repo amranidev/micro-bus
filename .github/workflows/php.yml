@@ -13,22 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    continue-on-error: ${{ matrix.experimental }}
-    strategy:
-      matrix:
-        os:
-          - "ubuntu-latest"
-        php:
-          - "8.0"
-          - "8.1"
-        phpunit:
-          - "^9.5.10"
-        dependencies:
-          - "locked"
-          - "lowest"
-          - "highest"
-        experimental:
-          - false
 
     steps:
     - uses: actions/checkout@v3
@@ -51,6 +35,8 @@ jobs:
 #       run: composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
     - name: run docker
       run: docker-compose up -d & sleep 50
+    - name: pwd
+      run: pwd
     - name: run tests
       run: vendor/bin/phpuni
     
