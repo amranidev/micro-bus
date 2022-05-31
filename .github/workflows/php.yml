@@ -31,8 +31,8 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-    - name: Install testbench
-      run: composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
+#     - name: Install testbench
+#       run: composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
     - name: run docker
       run: docker-compose up -d & sleep 50
     - name: run tests
