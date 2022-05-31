@@ -38,5 +38,5 @@ jobs:
     - name: pwd
       run: pwd
     - name: run tests
-      run: vendor/bin/phpuni
+      run: vendor/bin/phpunit
     
