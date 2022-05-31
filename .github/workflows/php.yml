@@ -13,6 +13,22 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.experimental }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+        php:
+          - "8.0"
+          - "8.1"
+        phpunit:
+          - "^9.5.10"
+        dependencies:
+          - "locked"
+          - "lowest"
+          - "highest"
+        experimental:
+          - false
 
     steps:
     - uses: actions/checkout@v3
