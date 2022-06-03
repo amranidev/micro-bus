@@ -12,8 +12,18 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+#     runs-on: ubuntu-latest
 
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - "ubuntu-latest"
+        php:
+          - "7.1"
+          - "7.2"
+          - "8.1"
+      
     steps:
     - uses: actions/checkout@v3
 
@@ -31,10 +41,12 @@ jobs:
 
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
-    - name: Install testbench
-      run: composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
+#     - name: Install testbench
+#       run: composer require --no-interaction --prefer-stable --no-suggest --update-with-dependencies --dev "orchestra/testbench:${TESTBENCH_VERSION}"
     - name: run docker
       run: docker-compose up -d & sleep 50
+    - name: pwd
+      run: pwd
     - name: run tests
-      run: vendor/bin/phpuni
+      run: vendor/bin/phpunit
     
