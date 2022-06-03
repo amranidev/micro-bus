@@ -13,7 +13,7 @@
     "aws/aws-sdk-php": "^3.95"
   },
   "require-dev": {
-    "orchestra/testbench": "^3.8"
+    "orchestra/testbench": "^7.5"
   },
   "autoload": {
     "psr-4": {
