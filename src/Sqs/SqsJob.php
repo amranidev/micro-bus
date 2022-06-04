@@ -45,7 +45,7 @@ class SqsJob extends AbstractSqsJob
         $payload = parent::payload();
 
         $payload['job'] = $this->handler;
-
+//        dd($this->handler);
         if ($this->isJson($payload['Message']) === true) {
             $payload['data'] = $payload['Message'];
         } else {
@@ -81,7 +81,13 @@ class SqsJob extends AbstractSqsJob
      */
     private function setLaravelJobUuid()
     {
+        // First we will need to check if the MessageAttributes exists.
+        if (!array_key_exists('MessageAttributes', $this->payload())) {
+            return;
+        }
+
         $snsMessageAttributes = $this->payload()['MessageAttributes'];
+
         if (isset($snsMessageAttributes)
             && isset($snsMessageAttributes['MICRO_BUS.JOB_UUID'])
             && isset($snsMessageAttributes['MICRO_BUS.JOB_UUID']['Value'])) {
