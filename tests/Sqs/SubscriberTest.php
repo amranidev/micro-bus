@@ -31,16 +31,14 @@ class SubscriberTest extends TestCase
     {
         $this->sendMessage(file_get_contents(__DIR__.'/messages/message.json'));
 
-        // Listen for the job to be processed.
         $this->app['events']->listen(JobProcessed::class, function ($event) {
             $this->job = $event->job;
         });
-
         // Run work command.
-        $this->artisan('queue:work', ['--once' => true]);
+        $this->artisan('queue:work', ['--once' => true])->execute();
 
         // Get the underlying subscriber job (JobHandler).
-        $subscriber = $this->job->getInstance();
+        $subscriber = $this->job->getResolvedJob();
 
         // Command job should not be null.
         self::assertNotNull($subscriber);
