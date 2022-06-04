@@ -45,7 +45,7 @@ trait InteractsWithSqs
     protected function makeSqsClient(): SqsClient
     {
         $client = new SqsClient([
-            'endpoint'    => 'http://localhost:4576',
+            'endpoint'    => 'http://localhost:4523',
             'version'     => 'latest',
             'region'      => 'local',
             'credentials' => [

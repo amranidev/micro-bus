@@ -41,7 +41,7 @@ abstract class TestCase extends OrchestraTestCase
         $config->set('queue.default', 'subscriber');
         $config->set('queue.connections.subscriber.key', 'foo');
         $config->set('queue.connections.subscriber.secret', 'bar');
-        $config->set('queue.connections.subscriber.prefix', 'http://localhost:4576/queue/');
+        $config->set('queue.connections.subscriber.prefix', 'http://localhost:4523/queue/');
         $config->set('queue.connections.subscriber.region', 'local');
         $config->set('queue.connections.subscriber.queue', 'micro-bus');
         $config->set('queue.connections.subscriber.driver', 'subscriber');
