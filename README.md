@@ -3,12 +3,21 @@
 </h1>
 
 <p align="center">
-   <a href="https://github.styleci.io/repos/190308907">
-      <img src="https://github.styleci.io/repos/190308907/shield?branch=master" alt="StyleCI">
-   </a>
-  <a href="https://travis-ci.org/amranidev/micro-bus" target="_blank">
-    <img src="https://travis-ci.org/amranidev/micro-bus.svg?branch=master">
-  </a>
+    <a href="https://github.com/amranidev/micro-bus/actions">
+        <img src="https://github.com/amranidev/micro-bus/actions/workflows/tests.yml/badge.svg" alt="Build Status">
+    </a>
+    <a href="https://packagist.org/packages/amranidev/micro-bus">
+        <img src="https://img.shields.io/packagist/dt/amranidev/micro-bus" alt="Total Downloads">
+    </a>
+    <a href="https://github.styleci.io/repos/190308907">
+        <img src="https://github.styleci.io/repos/190308907/shield?branch=master" alt="StyleCI">
+    </a>
+    <a href="https://packagist.org/packages/amranidev/micro-bus">
+        <img src="https://img.shields.io/packagist/v/amranidev/micro-bus" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/amranidev/micro-bus">
+        <img src="https://img.shields.io/packagist/l/amranidev/micro-bus" alt="License">
+    </a>
 </p>
 
 ## What is micro-bus?
