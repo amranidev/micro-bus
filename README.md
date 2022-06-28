@@ -349,24 +349,25 @@ Thank you for considering contributing to this project! The contribution guide c
 Create a `docker-compose.yml` file.
 
 ```yml
-version: '2.1'
+version: "3.8"
 
 services:
   localstack:
+    container_name: "${LOCALSTACK_DOCKER_NAME-localstack_main}"
     image: localstack/localstack
+    network_mode: bridge
     ports:
-      - "4567-4593:4567-4593"
-      - "${PORT_WEB_UI-8080}:${PORT_WEB_UI-8080}"
+      - '4566-4597:4566-4597'
     environment:
       - SERVICES=sqs,sns
-      - DEBUG=${DEBUG- }
-      - DATA_DIR=${DATA_DIR- }
-      - PORT_WEB_UI=${PORT_WEB_UI- }
-      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR- }
-      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
+      - DEBUG=${DEBUG-}
+      - DATA_DIR=${DATA_DIR-}
+      - LAMBDA_EXECUTOR=${LAMBDA_EXECUTOR-}
+      - LOCALSTACK_API_KEY=${LOCALSTACK_API_KEY-}  # only required for Pro
+      - HOST_TMP_FOLDER=${TMPDIR:-/tmp/}localstack
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
-      - "${TMPDIR:-/tmp/localstack}:/tmp/localstack"
+      - "${TMPDIR:-/tmp}/localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
 ```
 
