@@ -8,7 +8,7 @@ namespace Amranidev\MicroBus;
 class MicroBus
 {
     /**
-     * The Cashier library version.
+     * The Micro-Bus library version.
      *
      * @var string
      */
