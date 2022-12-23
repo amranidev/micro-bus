@@ -2,7 +2,7 @@
 
 ## v0.3.4 (2022-12-23)
 
-### Added
+### Removed
 
 - Remove serialize feature.
 
