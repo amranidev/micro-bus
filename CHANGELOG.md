@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.3.4 (2022-12-23)
+
+### Removed
+
+- Remove serialize feature.
+
 ## v0.3.1 (2022-03-26)
 
 ### Added
