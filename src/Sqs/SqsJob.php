@@ -22,9 +22,9 @@ class SqsJob extends AbstractSqsJob
      *
      * @param $container
      * @param \Aws\Sqs\SqsClient $sqs
-     * @param array $job
-     * @param string $connectionName
-     * @param string $queue
+     * @param array              $job
+     * @param string             $connectionName
+     * @param string             $queue
      * @param $handler
      */
     public function __construct($container, SqsClient $sqs, array $job, string $connectionName, string $queue, $handler)
