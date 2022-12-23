@@ -18,7 +18,6 @@ abstract class BaseSns
      */
     protected $topics;
 
-
     /**
      * Publisher constructor.
      *
@@ -49,9 +48,8 @@ abstract class BaseSns
      *
      * @param string $topic
      *
-     * @throws \Exception
-     *
      * @return mixed
+     * @throws \Exception
      */
     protected function getTopicArn($topic)
     {
