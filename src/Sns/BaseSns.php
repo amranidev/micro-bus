@@ -18,12 +18,6 @@ abstract class BaseSns
      */
     protected $topics;
 
-    /**
-     * The message is serializable by default.
-     *
-     * @var bool
-     */
-    protected $serializable = true;
 
     /**
      * Publisher constructor.
@@ -38,29 +32,8 @@ abstract class BaseSns
     }
 
     /**
-     * Set message serialization to false.
-     *
-     * @return BaseSns
-     */
-    public function withoutSerializing()
-    {
-        $this->serializable = false;
-
-        return $this;
-    }
-
-    /**
-     * Determine if the message is serializable.
-     *
-     * @return bool
-     */
-    public function isSerializable()
-    {
-        return $this->serializable ? true : false;
-    }
-
-    /**
      * Prepare the message to send.
+     * Default wrapper for the message to send.
      *
      * @param mixed $message
      *
@@ -68,10 +41,6 @@ abstract class BaseSns
      */
     protected function prepareMessage($message)
     {
-        if ($this->isSerializable()) {
-            return serialize($message);
-        }
-
         return $message;
     }
 
