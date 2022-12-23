@@ -48,8 +48,9 @@ abstract class BaseSns
      *
      * @param string $topic
      *
-     * @return mixed
      * @throws \Exception
+     *
+     * @return mixed
      */
     protected function getTopicArn($topic)
     {
