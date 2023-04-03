@@ -26,14 +26,9 @@ trait InteractsWithSqs
         $client->createQueue(['QueueName' => $queueName]);
         $client->purgeQueue(['QueueUrl' => $queueEndpoint]);
 
-        $decoded_message = json_decode($message, true);
-        $decoded_message['Message'] = serialize($decoded_message['Message']);
-
-        $messageToSend = json_encode($decoded_message);
-
         $client->sendMessage([
             'QueueUrl'    => $queueEndpoint,
-            'MessageBody' => $messageToSend,
+            'MessageBody' => $message,
         ]);
     }
 
@@ -47,7 +42,7 @@ trait InteractsWithSqs
         $client = new SqsClient([
             'endpoint'    => 'http://localhost:4566',
             'version'     => 'latest',
-            'region'      => 'local',
+            'region'      => 'us-east-1',
             'credentials' => [
                 'key'    => 'foo',
                 'secret' => 'bar',
