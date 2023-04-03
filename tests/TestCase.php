@@ -42,7 +42,7 @@ abstract class TestCase extends OrchestraTestCase
         $config->set('queue.connections.subscriber.key', 'foo');
         $config->set('queue.connections.subscriber.secret', 'bar');
         $config->set('queue.connections.subscriber.prefix', 'http://localhost:4566/111111111111/');
-        $config->set('queue.connections.subscriber.region', 'local');
+        $config->set('queue.connections.subscriber.region', 'us-east-1');
         $config->set('queue.connections.subscriber.queue', 'micro-bus');
         $config->set('queue.connections.subscriber.driver', 'subscriber');
         $config->set('subscriber.subscribers', [JobHandler::class => 'arn:aws:sns:eu-west-1:111111111111:my-topic-arn']);
