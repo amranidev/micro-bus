@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v0.3.5 (2023-04-06)
+
+### Fixed
+
+- Fixed tests: update localstack region configuration.
+
 ## v0.3.4 (2022-12-23)
 
 ### Removed
