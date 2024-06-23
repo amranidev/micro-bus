@@ -39,7 +39,9 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
     - name: run docker
-      run: docker-compose up -d & sleep 120
+      run: docker-compose up -d & sleep 50
+    - name: docker ps
+      run: docker ps
     - name: pwd
       run: pwd
     - name: run tests
